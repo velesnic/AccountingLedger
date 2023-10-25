@@ -6,13 +6,15 @@ import java.util.Scanner;
 public class UserInterface {
 
 TransactionManager transactionManager= new TransactionManager();
+ArrayList<Transaction> transactionList;
+Ledger ledger = new Ledger();
     public void homeScreen() {
         System.out.println("Welcome to Velesnic Accounting Ledger.");
         System.out.println("What is your username?");
         try {
             Scanner scanner = new Scanner(System.in);
             String username = scanner.nextLine();
-            System.out.println("Welcome " + username);
+            System.out.println("Welcome " + username + "!");
             boolean isOnline = true;
             while (isOnline) {
                 System.out.println("What would you like to do? Select a letter.");
@@ -31,7 +33,7 @@ TransactionManager transactionManager= new TransactionManager();
                                 transactionManager.makePayment();
                                 break;
                             case "l":
-                                //displays ledger screen with newest entries first
+                                ledger.ledgerMenu(transactionList);
                                 break;
                             case "x":
                                 System.out.println("Goodbye :)");
@@ -44,7 +46,6 @@ TransactionManager transactionManager= new TransactionManager();
 
                     } catch (Exception ex) {
                         System.out.println("Please enter one of the following options: D, P, L, or X. ");
-                        scanner.nextLine(); //allows user to enter in another option
                     }
                 }
 

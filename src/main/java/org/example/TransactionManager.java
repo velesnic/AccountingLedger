@@ -67,11 +67,15 @@ public class TransactionManager {
             String userVendor = scanner.nextLine();
             System.out.println("Deposit Amount: ");
             double userAmount = scanner.nextDouble();
-
-            Transaction newTransaction = new Transaction(userDate, userTime, userDescription, userVendor, userAmount);
-            transactionList.add(newTransaction);
-            addNewTransactionToFile(newTransaction);
-            System.out.println("Deposit of " + userAmount + " successfully added to file.");
+            if(userAmount > 0){
+                Transaction newTransaction = new Transaction(userDate, userTime, userDescription, userVendor, userAmount);
+                transactionList.add(newTransaction);
+                addNewTransactionToFile(newTransaction);
+                System.out.println("Deposit of " + userAmount + " successfully added to file.");
+            }
+            else{
+                System.out.println("Please enter a positive deposit value.");
+            }
         } catch (Exception ex) {
             System.out.println("Please enter a valid input.");
         }
@@ -92,11 +96,15 @@ public class TransactionManager {
             String userVendor = scanner.nextLine();
             System.out.println("Payment Amount: ");
             double userAmount = scanner.nextDouble();
-
-            Transaction newTransaction = new Transaction(userDate, userTime, userDescription, userVendor, userAmount);
-            transactionList.add(newTransaction);
-            addNewTransactionToFile(newTransaction);
-            System.out.println("Payment of " + userAmount + " successfully added to file.");
+            if(userAmount < 0.00 ){
+                Transaction newTransaction = new Transaction(userDate, userTime, userDescription, userVendor, userAmount);
+                transactionList.add(newTransaction);
+                addNewTransactionToFile(newTransaction);
+                System.out.println("Payment of " + userAmount + " successfully added to file.");
+            }
+            else{
+                System.out.println("Please enter a negative payment value.");
+            }
         } catch (Exception ex) {
             System.out.println("Please enter a valid input.");
         }
