@@ -3,19 +3,19 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Ledger {
-    static LedgerManager ledgerManager = new LedgerManager();
-    TransactionManager transactionManager= new TransactionManager();
+    LedgerManager ledgerManager = new LedgerManager();
+    static TransactionManager transactionManager= new TransactionManager();
     ArrayList<Transaction> transactionList;
+    static Reports reports = new Reports();
 
 
-    static void ledgerMenu(ArrayList<Transaction> transactionList){
+    public void ledgerMenu(ArrayList<Transaction> transactionList){
         Scanner ledgerscanner = new Scanner(System.in);
-        String username = " ";
         boolean isOnline= true;
         while(isOnline) {
-            System.out.println("Welcome to your Account Ledger " + username);
+            System.out.println("Welcome to your Account Ledger ");
             System.out.println("Please select an option.");
-            System.out.println("A. Display ALL Entries in Ledger..");
+            System.out.println("A. Display ALL Entries in Ledger.");
             System.out.println("D. Display Only Deposits in Ledger.");
             System.out.println("P. Display Only Payments in Ledger.");
             System.out.println("R. Run reports in Ledger.");
@@ -33,7 +33,7 @@ public class Ledger {
                         ledgerManager.displayPayments(transactionList);
                         break;
                     case "r":
-                        //run reports
+                        reports.runReports(transactionList);
                         break;
                     case "h":
                         isOnline=false;
@@ -43,7 +43,7 @@ public class Ledger {
                 }
 
             } catch (Exception ex) {
-                System.out.println("Please enter one of the following options: A, D, P, or R.");
+                System.out.println("Not a valid option.");
             }
         }
     }

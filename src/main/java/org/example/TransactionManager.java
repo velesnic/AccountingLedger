@@ -9,23 +9,23 @@ import java.util.Scanner;
 
 public class TransactionManager {
 
-    static ArrayList<Transaction> transactionList = new ArrayList<>();
+    public ArrayList<Transaction> transactionList = new ArrayList<>();
     public ArrayList<Transaction> TransactionList() {
 
         try {
             FileInputStream fileInputStream = new FileInputStream("src/main/resources/transactions.csv");
-            Scanner scanner = new Scanner(fileInputStream);
-            scanner.nextLine();
+            Scanner tmscanner = new Scanner(fileInputStream);
+            tmscanner.nextLine();
             String input;
-            while (scanner.hasNextLine()) {
-                input = scanner.nextLine();
+            while (tmscanner.hasNextLine()) {
+                input = tmscanner.nextLine();
                 String[] rowArray = input.split("\\|");
 
                 String date = rowArray[0];
                 String time = rowArray[1];
                 String description = rowArray[2];
                 String vendor = rowArray[3];
-                Double amount = Double.parseDouble(rowArray[4]);
+                double amount = Double.parseDouble(rowArray[4]);
 
                 Transaction transaction = new Transaction(date, time, description, vendor, amount);
 
@@ -39,7 +39,7 @@ public class TransactionManager {
     }
 
 
-    private static void addNewTransactionToFile(Transaction newTransaction){
+    public void addNewTransactionToFile(Transaction newTransaction){
         try{
             FileWriter newFilewriter= new FileWriter("src/main/resources/transactions.csv", true);
             newFilewriter.write( newTransaction.getDate() + " | " + newTransaction.getTime() + " | " + newTransaction.getDescription() + " | " +
@@ -53,20 +53,20 @@ public class TransactionManager {
         }
     }
 
-    static void addNewDeposit() {
+    public void addNewDeposit() {
         System.out.println("To complete a deposit, please enter the following information.");
         System.out.println("Date (YYYY-MM-DD): ");
         try {
-            Scanner scanner = new Scanner(System.in);
-            String userDate = scanner.nextLine();
+            Scanner ndscanner = new Scanner(System.in);
+            String userDate = ndscanner.nextLine();
             System.out.println("Time (HH:MM:SS): ");
-            String userTime = scanner.nextLine();
+            String userTime = ndscanner.nextLine();
             System.out.println("Description: ");
-            String userDescription = scanner.nextLine();
+            String userDescription = ndscanner.nextLine();
             System.out.println("Vendor: ");
-            String userVendor = scanner.nextLine();
+            String userVendor = ndscanner.nextLine();
             System.out.println("Deposit Amount: ");
-            double userAmount = scanner.nextDouble();
+            double userAmount = ndscanner.nextDouble();
             if(userAmount > 0){
                 Transaction newTransaction = new Transaction(userDate, userTime, userDescription, userVendor, userAmount);
                 transactionList.add(newTransaction);
@@ -82,20 +82,20 @@ public class TransactionManager {
 
     }
 
-    static void makePayment(){
+    public void makePayment(){
         System.out.println("To make a payment, please enter the following information.");
         System.out.println("Date (YYYY-MM-DD): ");
         try {
-            Scanner scanner = new Scanner(System.in);
-            String userDate = scanner.nextLine();
+            Scanner mpscanner = new Scanner(System.in);
+            String userDate = mpscanner.nextLine();
             System.out.println("Time (HH:MM:SS): ");
-            String userTime = scanner.nextLine();
+            String userTime = mpscanner.nextLine();
             System.out.println("Description: ");
-            String userDescription = scanner.nextLine();
+            String userDescription = mpscanner.nextLine();
             System.out.println("Vendor: ");
-            String userVendor = scanner.nextLine();
+            String userVendor = mpscanner.nextLine();
             System.out.println("Payment Amount: ");
-            double userAmount = scanner.nextDouble();
+            double userAmount = mpscanner.nextDouble();
             if(userAmount < 0.00 ){
                 Transaction newTransaction = new Transaction(userDate, userTime, userDescription, userVendor, userAmount);
                 transactionList.add(newTransaction);

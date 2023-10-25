@@ -9,14 +9,14 @@ public class LedgerManager {
     TransactionManager transactionManager= new TransactionManager();
     ArrayList<Transaction> transactionList;
 
-    static void displayAllEntries(ArrayList<Transaction> transactionList){
+    public void displayAllEntries(ArrayList<Transaction> transactionList){
         transactionList.sort(Comparator.comparing(Transaction::getDate).reversed());
         for(Transaction transaction: transactionList){
             System.out.println(transaction);
         }
     }
 
-    static void displayDeposits(ArrayList<Transaction> transactionList){
+    public void displayDeposits(ArrayList<Transaction> transactionList){
         transactionList.sort(Comparator.comparing(Transaction::getDate).reversed());
         boolean hasDeposits= false;
         for(Transaction transaction: transactionList){
@@ -30,7 +30,7 @@ public class LedgerManager {
         }
     }
 
-    static void displayPayments(ArrayList<Transaction> transactionList){
+    public void displayPayments(ArrayList<Transaction> transactionList){
         transactionList.sort(Comparator.comparing(Transaction::getDate).reversed());
         boolean hasPayments = false;
         for(Transaction transaction: transactionList){
@@ -44,9 +44,5 @@ public class LedgerManager {
         }
 
     }
-
-
-
-
 
 }

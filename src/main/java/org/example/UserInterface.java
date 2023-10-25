@@ -6,14 +6,15 @@ import java.util.Scanner;
 public class UserInterface {
 
 TransactionManager transactionManager= new TransactionManager();
-ArrayList<Transaction> transactionList;
+
 Ledger ledger = new Ledger();
     public void homeScreen() {
+        transactionManager.TransactionList();
         System.out.println("Welcome to Velesnic Accounting Ledger.");
         System.out.println("What is your username?");
         try {
-            Scanner scanner = new Scanner(System.in);
-            String username = scanner.nextLine();
+            Scanner homescanner = new Scanner(System.in);
+            String username = homescanner.nextLine();
             System.out.println("Welcome " + username + "!");
             boolean isOnline = true;
             while (isOnline) {
@@ -23,7 +24,7 @@ Ledger ledger = new Ledger();
                 System.out.println("L. Display Ledger Screen.");
                 System.out.println("X. Exit Velesnic Accounting Ledger.");
                     try {
-                        String homescreenChoice = scanner.nextLine();
+                        String homescreenChoice = homescanner.nextLine();
 
                         switch (homescreenChoice.toLowerCase()) {
                             case "d":
@@ -33,7 +34,7 @@ Ledger ledger = new Ledger();
                                 transactionManager.makePayment();
                                 break;
                             case "l":
-                                ledger.ledgerMenu(transactionList);
+                                ledger.ledgerMenu(transactionManager.transactionList);
                                 break;
                             case "x":
                                 System.out.println("Goodbye :)");
@@ -45,7 +46,7 @@ Ledger ledger = new Ledger();
 
 
                     } catch (Exception ex) {
-                        System.out.println("Please enter one of the following options: D, P, L, or X. ");
+                        System.out.println("Not a valid option. ");
                     }
                 }
 
