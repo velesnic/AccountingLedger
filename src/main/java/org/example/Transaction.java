@@ -55,4 +55,9 @@ public class Transaction {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s | %s | %s | %s | %f", this.getDate(), this.getTime(), this.getDescription(), this.getVendor(), this.getAmount());
+    }
 }
