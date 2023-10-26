@@ -7,6 +7,7 @@ public class Ledger {
     static TransactionManager transactionManager= new TransactionManager();
     ArrayList<Transaction> transactionList;
     static Reports reports = new Reports();
+    static UserInterface userInterface= new UserInterface();
 
 
     public void ledgerMenu(ArrayList<Transaction> transactionList){
@@ -36,7 +37,7 @@ public class Ledger {
                         reports.runReports(transactionList);
                         break;
                     case "h":
-                        isOnline=false;
+                        userInterface.homeScreen();
                         break;
                     default:
                         System.out.println("Please enter one of the following options: A, D, P, or R.");

@@ -4,6 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,8 +24,10 @@ public class TransactionManager {
                 input = tmscanner.nextLine();
                 String[] rowArray = input.split("\\|");
 
-                String date = rowArray[0];
-                String time = rowArray[1];
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                LocalDate date = LocalDate.parse(rowArray[0].trim(), dateFormatter);
+                LocalTime time = LocalTime.parse(rowArray[1].trim(), timeFormatter);
                 String description = rowArray[2];
                 String vendor = rowArray[3];
                 double amount = Double.parseDouble(rowArray[4]);
@@ -58,9 +63,9 @@ public class TransactionManager {
         System.out.println("Date (YYYY-MM-DD): ");
         try {
             Scanner ndscanner = new Scanner(System.in);
-            String userDate = ndscanner.nextLine();
+            LocalDate userDate = LocalDate.parse(ndscanner.nextLine());
             System.out.println("Time (HH:MM:SS): ");
-            String userTime = ndscanner.nextLine();
+            LocalTime userTime = LocalTime.parse(ndscanner.nextLine());
             System.out.println("Description: ");
             String userDescription = ndscanner.nextLine();
             System.out.println("Vendor: ");
@@ -68,7 +73,7 @@ public class TransactionManager {
             System.out.println("Deposit Amount: ");
             double userAmount = ndscanner.nextDouble();
             if(userAmount > 0){
-                Transaction newTransaction = new Transaction(userDate, userTime, userDescription, userVendor, userAmount);
+                Transaction newTransaction = new Transaction( userDate, userTime, userDescription, userVendor, userAmount);
                 transactionList.add(newTransaction);
                 addNewTransactionToFile(newTransaction);
                 System.out.println("Deposit of " + userAmount + " successfully added to file.");
@@ -87,9 +92,9 @@ public class TransactionManager {
         System.out.println("Date (YYYY-MM-DD): ");
         try {
             Scanner mpscanner = new Scanner(System.in);
-            String userDate = mpscanner.nextLine();
+            LocalDate userDate =LocalDate.parse(mpscanner.nextLine());
             System.out.println("Time (HH:MM:SS): ");
-            String userTime = mpscanner.nextLine();
+            LocalTime userTime = LocalTime.parse(mpscanner.nextLine());
             System.out.println("Description: ");
             String userDescription = mpscanner.nextLine();
             System.out.println("Vendor: ");
